@@ -30,19 +30,22 @@ const stagger = {
 
 const galleryImages = [
   {
-    src: "/album-gallery-01.png",
-    alt: "3D 촉각 졸업앨범 인터랙티브 아카이브 그래픽",
-    label: "Interactive Archive",
+    src: "/album-gallery-01.jpg",
+    alt: "전북맹아학교 3D 촉각 졸업앨범 사선 실물 사진",
+    label: "Album Photo 01",
+    fit: "cover",
   },
   {
     src: "/album-gallery-02.jpg",
-    alt: "전북맹아학교 3D 촉각 졸업앨범 실물 사진 1",
-    label: "Tactile Album Photo 01",
+    alt: "전북맹아학교 3D 촉각 졸업앨범 정면 실물 사진",
+    label: "Album Photo 02",
+    fit: "cover",
   },
   {
-    src: "/album-gallery-03.jpg",
-    alt: "전북맹아학교 3D 촉각 졸업앨범 실물 사진 2",
-    label: "Tactile Album Photo 02",
+    src: "/album-gallery-03.png",
+    alt: "전북맹아학교 추억의 앨범 디지털 콘텐츠 화면",
+    label: "Digital Content",
+    fit: "contain",
   },
 ];
 
@@ -80,7 +83,7 @@ function HeroGallery() {
                   fill
                   priority={index === 0}
                   sizes="(max-width: 1024px) 92vw, 44vw"
-                  className="object-cover"
+                  className={image.fit === "contain" ? "object-contain p-4 sm:p-6" : "object-cover"}
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/8 to-black/60" />
               </div>
