@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
@@ -27,6 +27,100 @@ const stagger = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.12 } },
 };
+
+const galleryImages = [
+  {
+    src: "/album-gallery-01.png",
+    alt: "3D 촉각 졸업앨범 인터랙티브 아카이브 그래픽",
+    label: "Interactive Archive",
+  },
+  {
+    src: "/album-gallery-02.jpg",
+    alt: "전북맹아학교 3D 촉각 졸업앨범 실물 사진 1",
+    label: "Tactile Album Photo 01",
+  },
+  {
+    src: "/album-gallery-03.jpg",
+    alt: "전북맹아학교 3D 촉각 졸업앨범 실물 사진 2",
+    label: "Tactile Album Photo 02",
+  },
+];
+
+function HeroGallery() {
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setCurrent((prev) => (prev + 1) % galleryImages.length);
+    }, 3800);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.96 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.9, ease: "easeOut" }}
+      className="relative"
+    >
+      <div className="absolute inset-6 rounded-[3rem] bg-[#b69a6c]/20 blur-3xl" />
+      <div className="relative overflow-hidden rounded-[3rem] border border-white/70 bg-white/45 p-4 shadow-[0_40px_120px_rgba(60,43,27,0.18)] backdrop-blur-xl sm:p-5">
+        <div className="relative overflow-hidden rounded-[2.5rem] bg-[#211a16] text-white">
+          <div className="relative aspect-[4/5] min-h-[520px] w-full overflow-hidden sm:aspect-[1/1] lg:aspect-[4/5]">
+            {galleryImages.map((image, index) => (
+              <div
+                key={image.src}
+                className={`absolute inset-0 transition-opacity duration-1000 ease-out ${index === current ? "opacity-100" : "opacity-0"}`}
+                aria-hidden={index !== current}
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  priority={index === 0}
+                  sizes="(max-width: 1024px) 92vw, 44vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/8 to-black/60" />
+              </div>
+            ))}
+
+            <div className="absolute left-0 top-0 z-10 flex w-full items-start justify-between gap-6 p-7 sm:p-8">
+              <div>
+                <p className="text-xs uppercase tracking-[0.35em] text-[#d7c19b]">Interactive Archive</p>
+                <h2 className="mt-4 text-3xl font-semibold leading-tight sm:text-4xl">3D Tactile Album</h2>
+              </div>
+              <QrCode className="shrink-0 text-[#d7c19b]" size={34} />
+            </div>
+
+            <div className="absolute bottom-0 left-0 z-10 w-full p-6 sm:p-8">
+              <div className="rounded-[1.5rem] border border-white/15 bg-[#211a16]/72 p-5 shadow-2xl backdrop-blur-md">
+                <p className="text-sm leading-7 text-[#eee2d1] sm:text-[15px]">
+                  1명의 선생님과 7명의 학생 흉상을 포함한 촉각 앨범. 오른쪽 상단의 NFC tag를 통해 별도 음성 인터랙션 웹사이트로 연결됩니다.
+                </p>
+              </div>
+              <div className="mt-4 flex items-center justify-between gap-4">
+                <p className="text-xs font-medium uppercase tracking-[0.22em] text-[#d7c19b]">{galleryImages[current].label}</p>
+                <div className="flex gap-2" aria-label="앨범 사진 갤러리 페이지 표시">
+                  {galleryImages.map((_, index) => (
+                    <button
+                      key={index}
+                      type="button"
+                      aria-label={`${index + 1}번째 이미지 보기`}
+                      onClick={() => setCurrent(index)}
+                      className={`h-2 rounded-full transition-all ${index === current ? "w-8 bg-[#d7c19b]" : "w-2 bg-white/45 hover:bg-white/70"}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 function SectionTitle({ eyebrow, title, desc }: { eyebrow: string; title: string; desc?: string }) {
   return (
@@ -112,30 +206,7 @@ export default function Home() {
             </motion.div>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.9, ease: "easeOut" }} className="relative">
-            <div className="absolute inset-6 rounded-[3rem] bg-[#b69a6c]/20 blur-3xl" />
-            <div className="relative rounded-[3rem] border border-white/70 bg-white/45 p-5 shadow-[0_40px_120px_rgba(60,43,27,0.18)] backdrop-blur-xl">
-              <div className="rounded-[2.5rem] bg-[#211a16] p-8 text-white">
-                <div className="flex items-start justify-between gap-6">
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.35em] text-[#d7c19b]">Interactive Archive</p>
-                    <h2 className="mt-4 font-serif text-3xl font-semibold">3D Tactile Album</h2>
-                  </div>
-                  <QrCode className="text-[#d7c19b]" size={34} />
-                </div>
-                <div className="mt-10 grid grid-cols-4 gap-3" aria-label="선생님 1명과 학생 7명을 상징하는 8개의 흉상 카드">
-                  {Array.from({ length: 8 }).map((_, i) => (
-                    <div key={i} className="aspect-[3/4] rounded-2xl bg-gradient-to-b from-[#f3eadb] to-[#b99d70] shadow-inner" />
-                  ))}
-                </div>
-                <div className="mt-8 rounded-[1.5rem] border border-white/10 bg-white/8 p-5">
-                  <p className="text-sm leading-7 text-[#eee2d1]">
-                    1명의 선생님과 7명의 학생 흉상을 포함한 촉각 앨범. 오른쪽 상단의 NFC tag를 통해 별도 음성 인터랙션 웹사이트로 연결됩니다.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+          <HeroGallery />
         </div>
 
         <a href="#overview" aria-label="아래로 이동" className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 rounded-full border border-[#cdbb9f] bg-white/45 p-3 text-[#7a6038] backdrop-blur">
