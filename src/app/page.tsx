@@ -238,15 +238,26 @@ export default function Home() {
           <SectionTitle
             eyebrow="Team & Credits"
             title="TEAM 소개"
-            desc="성균관대학교 정보통신대학 조준동 명예교수님의 지도 아래, 본 팀은 시각장애 학생들이 졸업의 순간과 친구들과의 추억을 촉각과 청각을 통해 경험할 수 있도록 음성지원 3D 촉각 졸업앨범을 기획·제작하였습니다."
+            desc="본 작품은 심화융합캡스톤디자인 수업 팀프로젝트로 진행되었으며, 성균관대학교 조준동 명예교수님의 지도 아래 제작되었습니다."
           />
           <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.25 }} className="rounded-[2.5rem] border border-[#eadfce] bg-white p-8 shadow-[0_24px_80px_rgba(75,55,35,0.08)] md:p-12">
             <div className="grid gap-10 md:grid-cols-2">
               <div>
                 <h3 className="font-serif text-2xl font-semibold text-[#211a16]">제작 참여</h3>
-                <p className="mt-4 leading-8 text-[#6f625a]">
-                  본 프로젝트에는 팀장 문홍진, 팀원 남재호, 장예림, 최송희가 참여하였으며, 사용자 경험 설계, 3D 모델링, 인터랙션 시스템 구현, 콘텐츠 제작을 중심으로 협업을 진행하였습니다.
-                </p>
+                <div className="mt-4 space-y-4 text-[15px] leading-8 text-[#6f625a]">
+                  <p>
+                    <strong className="font-semibold text-[#211a16]">디지털 콘텐츠</strong> · 성균관대학교 조준동 명예교수 제작, WCAG 2.1 AA 준수 설계, TalkBack·VoiceOver 지원
+                  </p>
+                  <p>
+                    <strong className="font-semibold text-[#211a16]">촉각 모델</strong> · NFC 태그, 프레임 제작, QR 작품소개 등
+                  </p>
+                  <p>
+                    <strong className="font-semibold text-[#211a16]">심화융합캡스톤디자인 수업 팀프로젝트</strong> · 담당교수 조준동, 팀원 문홍진, 남재호, 장예림, 최송희
+                  </p>
+                  <p>
+                    <strong className="font-semibold text-[#211a16]">제작 지원</strong> · 성균관대학교 RISE 사업단 실습비 지원
+                  </p>
+                </div>
               </div>
               <div>
                 <h3 className="font-serif text-2xl font-semibold text-[#211a16]">감사의 말</h3>
@@ -256,7 +267,7 @@ export default function Home() {
               </div>
             </div>
             <div className="mt-10 rounded-[1.7rem] bg-[#f8f2e9] px-6 py-5 text-center text-sm leading-7 text-[#6f625a]">
-              제작지원 · 성균관대학교 심화융합캡스톤디자인 프로젝트팀
+              심화융합캡스톤디자인 수업 팀프로젝트 · 담당교수 조준동 · 성균관대학교 RISE 사업단 실습비 지원
             </div>
           </motion.div>
         </div>
