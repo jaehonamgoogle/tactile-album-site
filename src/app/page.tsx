@@ -255,6 +255,41 @@ export default function Home() {
             <TimelineItem number="1" title="QR 코드 스캔" text="앨범에 부착된 QR 코드를 스캔하여 본 작품 소개 웹사이트에 접속합니다." />
             <TimelineItem number="2" title="작품 이해" text="3D 촉각 졸업앨범의 제작 의도, 구성 요소, 사용 방식, 기대 효과를 확인합니다." />
             <TimelineItem number="3" title="NFC 기반 음성 경험" text="앨범 오른쪽 상단의 NFC tag를 통해 별도 인터랙션 웹사이트로 이동하고, 학생과 선생님의 음성 메시지와 콘텐츠를 경험합니다." />
+
+            <motion.div variants={fadeUp} className="overflow-hidden rounded-[2rem] border border-[#d7c19b]/30 bg-white/[0.06] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.18)] backdrop-blur">
+              <div className="grid items-center gap-6 sm:grid-cols-[1fr_180px]">
+                <div>
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-[#d7c19b]">NFC Interactive Site</p>
+                  <a
+                    href="https://jdcho0721.github.io/Album-of-memories/index.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-serif text-2xl font-semibold text-white underline decoration-[#d7c19b]/50 underline-offset-8 transition hover:text-[#f1dfbd]"
+                  >
+                    추억의 앨범 디지털 가이드
+                  </a>
+                  <p className="mt-4 text-[15px] leading-7 text-[#d8cfc5]">
+                    앨범 오른쪽 상단의 NFC tag를 인식하면 접속할 수 있는 별도 인터랙티브 웹사이트입니다. 학생과 선생님의 음성 메시지, 학생별 특징과 꿈, 배치 정보를 확인할 수 있습니다.
+                  </p>
+                  <p className="mt-4 text-xs font-medium uppercase tracking-[0.18em] text-[#d7c19b]">Tap the title or scan the QR</p>
+                </div>
+                <a
+                  href="https://jdcho0721.github.io/Album-of-memories/index.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="추억의 앨범 디지털 가이드 열기"
+                  className="mx-auto block w-full max-w-[180px] rounded-[1.4rem] bg-white p-3 shadow-2xl transition hover:scale-[1.02]"
+                >
+                  <Image
+                    src="/memory-guide-qr.jpg"
+                    alt="추억의 앨범 디지털 가이드 QR 코드"
+                    width={320}
+                    height={320}
+                    className="h-auto w-full rounded-[1rem]"
+                  />
+                </a>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
