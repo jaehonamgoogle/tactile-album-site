@@ -12,6 +12,8 @@
 html {
   scroll-behavior: smooth;
   word-break: keep-all;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -24,6 +26,8 @@ body {
   line-break: strict;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 h1,
@@ -46,4 +50,19 @@ div {
 ::selection {
   background: #d7c19b;
   color: #211a16;
+}
+
+
+img, video, canvas, svg {
+  max-width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+  a, button {
+    max-width: 100%;
+  }
 }

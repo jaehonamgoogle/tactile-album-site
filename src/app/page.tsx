@@ -65,12 +65,12 @@ function HeroGallery() {
       initial={{ opacity: 0, scale: 0.96 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.9, ease: "easeOut" }}
-      className="relative"
+      className="relative min-w-0 w-full max-w-full"
     >
-      <div className="absolute inset-6 rounded-[3rem] bg-[#b69a6c]/20 blur-3xl" />
-      <div className="relative overflow-hidden rounded-[3rem] border border-white/70 bg-white/45 p-4 shadow-[0_40px_120px_rgba(60,43,27,0.18)] backdrop-blur-xl sm:p-5">
-        <div className="relative overflow-hidden rounded-[2.5rem] bg-[#211a16] text-white">
-          <div className="relative aspect-[4/5] min-h-[520px] w-full overflow-hidden sm:aspect-[1/1] lg:aspect-[4/5]">
+      <div className="absolute inset-4 rounded-[2rem] bg-[#b69a6c]/20 blur-3xl sm:inset-6 sm:rounded-[3rem]" />
+      <div className="relative w-full max-w-full overflow-hidden rounded-[2rem] border border-white/70 bg-white/45 p-3 shadow-[0_40px_120px_rgba(60,43,27,0.18)] backdrop-blur-xl sm:rounded-[3rem] sm:p-5">
+        <div className="relative w-full overflow-hidden rounded-[1.7rem] bg-[#211a16] text-white sm:rounded-[2.5rem]">
+          <div className="relative h-[430px] w-full max-w-full overflow-hidden sm:h-[560px] lg:h-[620px]">
             {galleryImages.map((image, index) => (
               <div
                 key={image.src}
@@ -89,17 +89,17 @@ function HeroGallery() {
               </div>
             ))}
 
-            <div className="absolute left-0 top-0 z-10 flex w-full items-start justify-between gap-6 p-7 sm:p-8">
+            <div className="absolute left-0 top-0 z-10 flex w-full items-start justify-between gap-4 p-5 sm:gap-6 sm:p-8">
               <div>
-                <p className="text-xs uppercase tracking-[0.35em] text-[#d7c19b]">Interactive Archive</p>
-                <h2 className="mt-4 text-3xl font-semibold leading-tight sm:text-4xl">3D Tactile Album</h2>
+                <p className="text-[10px] uppercase tracking-[0.28em] text-[#d7c19b] sm:text-xs sm:tracking-[0.35em]">Interactive Archive</p>
+                <h2 className="mt-3 text-2xl font-semibold leading-tight sm:mt-4 sm:text-4xl">3D Tactile Album</h2>
               </div>
               <QrCode className="shrink-0 text-[#d7c19b]" size={34} />
             </div>
 
-            <div className="absolute bottom-0 left-0 z-10 w-full p-6 sm:p-8">
-              <div className="rounded-[1.5rem] border border-white/15 bg-[#211a16]/72 p-5 shadow-2xl backdrop-blur-md">
-                <p className="text-sm leading-7 text-[#eee2d1] sm:text-[15px]">
+            <div className="absolute bottom-0 left-0 z-10 w-full p-4 sm:p-8">
+              <div className="rounded-[1.2rem] border border-white/15 bg-[#211a16]/72 p-4 shadow-2xl backdrop-blur-md sm:rounded-[1.5rem] sm:p-5">
+                <p className="text-xs leading-6 text-[#eee2d1] sm:text-[15px] sm:leading-7">
                   1명의 선생님과 7명의 학생 흉상을 포함한 촉각 앨범. 오른쪽 상단의 NFC tag를 통해 별도 음성 인터랙션 웹사이트로 연결됩니다.
                 </p>
               </div>
@@ -164,15 +164,15 @@ function TtsGuideButton({ text }: { text: string }) {
   };
 
   return (
-    <div className="mt-8 rounded-[1.6rem] border border-[#dbc8aa] bg-white/55 p-4 shadow-sm backdrop-blur" role="region" aria-label="작품 소개 음성 안내">
+    <div className="mt-8 w-full max-w-full overflow-hidden rounded-[1.6rem] border border-[#dbc8aa] bg-white/55 p-4 shadow-sm backdrop-blur" role="region" aria-label="작품 소개 음성 안내">
       <button
         type="button"
         onClick={handleSpeak}
-        className="flex w-full items-center justify-between gap-4 rounded-[1.2rem] bg-[#211a16] px-5 py-4 text-left text-sm font-semibold text-white shadow-lg shadow-[#211a16]/10 transition hover:bg-[#3a2d24] focus:outline-none focus:ring-4 focus:ring-[#d7c19b]/60"
+        className="flex w-full max-w-full flex-col items-start gap-2 rounded-[1.2rem] bg-[#211a16] px-4 py-4 text-left text-sm font-semibold text-white shadow-lg shadow-[#211a16]/10 transition hover:bg-[#3a2d24] focus:outline-none focus:ring-4 focus:ring-[#d7c19b]/60 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-5"
         aria-label={isSpeaking ? "작품 소개 음성 안내 정지" : "작품 소개 음성으로 듣기"}
         aria-pressed={isSpeaking}
       >
-        <span className="flex items-center gap-3">
+        <span className="flex min-w-0 items-center gap-3">
           <Volume2 size={20} aria-hidden="true" />
           {isSpeaking ? "음성 안내 정지" : "작품 소개 음성으로 듣기"}
         </span>
@@ -201,7 +201,7 @@ function SectionTitle({ eyebrow, title, desc }: { eyebrow: string; title: string
       className="mx-auto mb-14 max-w-3xl text-center"
     >
       <p className="mb-4 text-xs font-semibold uppercase tracking-[0.35em] text-[#9a7b4f]">{eyebrow}</p>
-      <h2 className="font-serif text-4xl font-semibold tracking-tight text-[#211a16] md:text-5xl">{title}</h2>
+      <h2 className="font-serif text-3xl font-semibold tracking-tight text-[#211a16] sm:text-4xl md:text-5xl">{title}</h2>
       {desc && <p className="mt-5 text-base leading-8 text-[#6f625a] md:text-lg">{desc}</p>}
     </motion.div>
   );
@@ -238,7 +238,7 @@ export default function Home() {
   const ttsGuideText = "전북맹아학교 고등부 24회 3D 촉각 졸업앨범을 소개합니다. 본 작품은 선생님 1명과 학생 7명의 얼굴 특징을 3D 프린팅한 촉각 모델과 학생 본인의 음성 메시지를 결합한 졸업앨범입니다. 사용자는 손끝으로 친구의 얼굴 형태를 만지고, NFC 태그를 통해 연결되는 추억의 앨범 디지털 가이드에서 학생과 선생님의 목소리, 학생별 특징과 꿈, 배치 정보를 확인할 수 있습니다. 이 웹사이트는 큐알 코드를 통해 접속하는 작품 소개 페이지이며, 작품 개요, 이용 방법, 기대 효과, 제작 참여 정보를 안내합니다.";
 
   return (
-    <main className="min-h-screen bg-[#f8f2e9] text-[#211a16]" aria-label="전북맹아학교 3D 촉각 졸업앨범 작품 소개">
+    <main className="min-h-screen overflow-x-hidden bg-[#f8f2e9] text-[#211a16]" aria-label="전북맹아학교 3D 촉각 졸업앨범 작품 소개">
       <nav className="fixed left-1/2 top-5 z-50 hidden w-[min(92%,980px)] -translate-x-1/2 items-center justify-between rounded-full border border-white/70 bg-white/60 px-6 py-3 shadow-[0_10px_40px_rgba(60,43,27,0.10)] backdrop-blur-xl md:flex">
         <a href="#home" className="font-serif text-lg font-semibold">3D 촉각 졸업앨범</a>
         <div className="flex gap-6 text-sm font-medium text-[#6f625a]">
@@ -249,28 +249,28 @@ export default function Home() {
         </div>
       </nav>
 
-      <section id="home" className="relative flex min-h-screen items-center overflow-hidden px-6 py-24 md:px-12">
+      <section id="home" className="relative flex min-h-screen items-center overflow-hidden px-5 py-20 sm:px-6 sm:py-24 md:px-12">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(174,139,88,0.22),transparent_34%),linear-gradient(120deg,#fffaf2_0%,#f6efe6_48%,#e8dccb_100%)]" />
         <div className="absolute right-[-12rem] top-[-10rem] h-[34rem] w-[34rem] rounded-full bg-[#d9c3a1]/40 blur-3xl" />
         <div className="absolute bottom-[-12rem] left-[-10rem] h-[32rem] w-[32rem] rounded-full bg-[#efe2cc]/80 blur-3xl" />
 
-        <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
-          <motion.div initial="hidden" animate="visible" variants={stagger}>
-            <motion.div variants={fadeUp} className="mb-7 inline-flex items-center gap-2 rounded-full border border-[#dbc8aa] bg-white/55 px-4 py-2 text-sm text-[#745a36] shadow-sm backdrop-blur">
+        <div className="relative z-10 mx-auto grid w-full max-w-7xl min-w-0 items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+          <motion.div initial="hidden" animate="visible" variants={stagger} className="min-w-0">
+            <motion.div variants={fadeUp} className="mb-7 inline-flex max-w-full items-center gap-2 rounded-full border border-[#dbc8aa] bg-white/55 px-4 py-2 text-sm text-[#745a36] shadow-sm backdrop-blur">
               <Sparkles size={16} />
               전북맹아학교 고등부 24회 3D 촉각 졸업앨범
             </motion.div>
-            <motion.h1 variants={fadeUp} className="font-serif text-5xl font-semibold leading-[1.08] tracking-tight text-[#1f1712] md:text-7xl">
+            <motion.h1 variants={fadeUp} className="font-serif text-[clamp(3rem,12vw,4.6rem)] font-semibold leading-[1.08] tracking-tight text-[#1f1712] md:text-7xl">
               만지고, 듣고,
               <br />기억하는 졸업앨범
             </motion.h1>
-            <motion.p variants={fadeUp} className="mt-8 max-w-2xl text-lg leading-9 text-[#66594f] md:text-xl">
+            <motion.p variants={fadeUp} className="mt-8 max-w-2xl text-base leading-8 text-[#66594f] sm:text-lg sm:leading-9 md:text-xl">
               본 작품은 학생의 얼굴 특징을 3D 프린팅한 촉각 모델과 학생 본인의 음성 메시지를 결합한 졸업앨범입니다. 사용자는 손끝으로 친구의 얼굴 형태를 만지고, 목소리를 들으며 졸업의 순간을 더 생생하게 기억할 수 있습니다.
             </motion.p>
             <motion.div variants={fadeUp}>
               <TtsGuideButton text={ttsGuideText} />
             </motion.div>
-            <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-4">
+            <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-3 sm:gap-4">
               <a href="#overview" className="rounded-full bg-[#211a16] px-7 py-4 text-sm font-semibold text-white shadow-xl shadow-[#211a16]/15 transition hover:bg-[#3a2d24]">
                 작품 소개 보기
               </a>
@@ -313,7 +313,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl gap-16 lg:grid-cols-[0.9fr_1.1fr]">
           <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.35 }}>
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.35em] text-[#d7c19b]">Experience Flow</p>
-            <h2 className="font-serif text-4xl font-semibold leading-tight md:text-5xl">QR로 소개를 읽고,<br />NFC로 목소리를 듣습니다.</h2>
+            <h2 className="font-serif text-3xl font-semibold leading-tight sm:text-4xl md:text-5xl">QR로 소개를 읽고,<br />NFC로 목소리를 듣습니다.</h2>
             <p className="mt-6 text-lg leading-9 text-[#d8cfc5]">
               이 웹사이트는 앨범에 부착된 QR 코드를 통해 접속하는 작품 소개 페이지입니다. 관람자는 작품의 의도, 사용 방법, 기대 효과, 제작팀 정보를 한눈에 확인할 수 있습니다.
             </p>
