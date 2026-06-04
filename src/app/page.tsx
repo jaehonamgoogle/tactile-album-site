@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
@@ -191,6 +191,89 @@ function TtsGuideButton({ text }: { text: string }) {
   );
 }
 
+
+function IntroPromptBanner({ text }: { text: string }) {
+  const [visible, setVisible] = useState(true);
+  const [status, setStatus] = useState("음성 안내를 들으려면 작품 소개 음성으로 듣기 버튼을 누르거나, 화면의 빈 곳을 3초 이상 길게 눌러주세요.");
+  const pressStartRef = useRef<number | null>(null);
+
+  const speakGuide = () => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) {
+      setStatus("현재 브라우저에서는 음성 안내 기능을 지원하지 않습니다.");
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "ko-KR";
+    utterance.rate = 0.92;
+    utterance.pitch = 1;
+    utterance.volume = 1;
+    utterance.onstart = () => setStatus("작품 소개 음성 안내가 시작되었습니다.");
+    utterance.onend = () => setStatus("작품 소개 음성 안내가 종료되었습니다.");
+    utterance.onerror = () => setStatus("음성 안내를 재생하지 못했습니다. 작품 소개 음성으로 듣기 버튼을 눌러 다시 시도해주세요.");
+    window.speechSynthesis.speak(utterance);
+  };
+
+  useEffect(() => {
+    const isInteractiveElement = (target: EventTarget | null) => {
+      if (!(target instanceof Element)) return false;
+      return Boolean(target.closest("a, button, input, textarea, select, [role='button']"));
+    };
+
+    const handlePressStart = (event: PointerEvent | TouchEvent | MouseEvent) => {
+      if (isInteractiveElement(event.target)) return;
+      pressStartRef.current = Date.now();
+    };
+
+    const handlePressEnd = () => {
+      if (!pressStartRef.current) return;
+      const duration = Date.now() - pressStartRef.current;
+      pressStartRef.current = null;
+      if (duration >= 3000) {
+        setVisible(false);
+        speakGuide();
+      }
+    };
+
+    const handleCancel = () => {
+      pressStartRef.current = null;
+    };
+
+    window.addEventListener("pointerdown", handlePressStart, { passive: true });
+    window.addEventListener("pointerup", handlePressEnd, { passive: true });
+    window.addEventListener("pointercancel", handleCancel, { passive: true });
+    window.addEventListener("touchcancel", handleCancel, { passive: true });
+
+    return () => {
+      window.removeEventListener("pointerdown", handlePressStart);
+      window.removeEventListener("pointerup", handlePressEnd);
+      window.removeEventListener("pointercancel", handleCancel);
+      window.removeEventListener("touchcancel", handleCancel);
+    };
+  }, [text]);
+
+  return (
+    <>
+      <div className="sr-only" role="status" aria-live="polite">
+        {status}
+      </div>
+      {visible && (
+        <div className="fixed inset-x-4 bottom-4 z-[70] mx-auto max-w-xl rounded-[1.25rem] border border-[#dbc8aa] bg-[#fffaf2]/95 p-4 text-sm leading-6 text-[#5c4529] shadow-[0_18px_60px_rgba(75,55,35,0.18)] backdrop-blur md:bottom-6 md:text-base" role="note" aria-label="음성 안내 이용 방법">
+          <div className="flex gap-3">
+            <Volume2 className="mt-1 shrink-0 text-[#8f6b3d]" size={20} aria-hidden="true" />
+            <div className="min-w-0">
+              <p className="font-semibold text-[#211a16]">음성 안내가 필요하신가요?</p>
+              <p className="mt-1">상단의 <strong>작품 소개 음성으로 듣기</strong> 버튼을 누르거나, 화면의 빈 곳을 <strong>3초 이상 길게 눌러주세요.</strong></p>
+            </div>
+            <button type="button" onClick={() => setVisible(false)} className="ml-auto shrink-0 rounded-full px-2 text-[#7b6d63] hover:bg-[#eadfce]" aria-label="음성 안내 이용 방법 닫기">×</button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
 function SectionTitle({ eyebrow, title, desc }: { eyebrow: string; title: string; desc?: string }) {
   return (
     <motion.div
@@ -239,6 +322,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-[#f8f2e9] text-[#211a16]" aria-label="전북맹아학교 3D 촉각 졸업앨범 작품 소개">
+      <IntroPromptBanner text={ttsGuideText} />
       <nav className="fixed left-1/2 top-5 z-50 hidden w-[min(92%,980px)] -translate-x-1/2 items-center justify-between rounded-full border border-white/70 bg-white/60 px-6 py-3 shadow-[0_10px_40px_rgba(60,43,27,0.10)] backdrop-blur-xl md:flex">
         <a href="#home" className="font-serif text-lg font-semibold">3D 촉각 졸업앨범</a>
         <div className="flex gap-6 text-sm font-medium text-[#6f625a]">
