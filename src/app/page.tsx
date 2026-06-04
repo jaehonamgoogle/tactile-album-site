@@ -125,6 +125,72 @@ function HeroGallery() {
   );
 }
 
+
+function TtsGuideButton({ text }: { text: string }) {
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [isSupported, setIsSupported] = useState(true);
+
+  useEffect(() => {
+    setIsSupported(typeof window !== "undefined" && "speechSynthesis" in window);
+    return () => {
+      if (typeof window !== "undefined" && "speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, []);
+
+  const handleSpeak = () => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) {
+      setIsSupported(false);
+      return;
+    }
+
+    if (window.speechSynthesis.speaking) {
+      window.speechSynthesis.cancel();
+      setIsSpeaking(false);
+      return;
+    }
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "ko-KR";
+    utterance.rate = 0.92;
+    utterance.pitch = 1;
+    utterance.volume = 1;
+    utterance.onend = () => setIsSpeaking(false);
+    utterance.onerror = () => setIsSpeaking(false);
+
+    setIsSpeaking(true);
+    window.speechSynthesis.speak(utterance);
+  };
+
+  return (
+    <div className="mt-8 rounded-[1.6rem] border border-[#dbc8aa] bg-white/55 p-4 shadow-sm backdrop-blur" role="region" aria-label="작품 소개 음성 안내">
+      <button
+        type="button"
+        onClick={handleSpeak}
+        className="flex w-full items-center justify-between gap-4 rounded-[1.2rem] bg-[#211a16] px-5 py-4 text-left text-sm font-semibold text-white shadow-lg shadow-[#211a16]/10 transition hover:bg-[#3a2d24] focus:outline-none focus:ring-4 focus:ring-[#d7c19b]/60"
+        aria-label={isSpeaking ? "작품 소개 음성 안내 정지" : "작품 소개 음성으로 듣기"}
+        aria-pressed={isSpeaking}
+      >
+        <span className="flex items-center gap-3">
+          <Volume2 size={20} aria-hidden="true" />
+          {isSpeaking ? "음성 안내 정지" : "작품 소개 음성으로 듣기"}
+        </span>
+        <span className="text-xs font-medium text-[#d7c19b]">TTS</span>
+      </button>
+      <p className="mt-3 text-sm leading-6 text-[#6f625a]">
+        버튼을 누르면 작품 개요와 이용 방법을 한국어 음성으로 들을 수 있습니다. TalkBack과 VoiceOver 사용자를 위해 이미지 대체 텍스트와 명확한 링크 설명도 함께 적용했습니다.
+      </p>
+      {!isSupported && (
+        <p className="mt-2 text-sm font-medium text-[#8a3d2b]" role="status">
+          현재 브라우저에서는 음성 읽기 기능을 지원하지 않습니다.
+        </p>
+      )}
+      <p className="sr-only" aria-live="polite">{isSpeaking ? "작품 소개 음성 안내가 재생 중입니다." : "작품 소개 음성 안내가 정지되었습니다."}</p>
+    </div>
+  );
+}
+
 function SectionTitle({ eyebrow, title, desc }: { eyebrow: string; title: string; desc?: string }) {
   return (
     <motion.div
@@ -169,8 +235,10 @@ function TimelineItem({ number, title, text }: { number: string; title: string; 
 }
 
 export default function Home() {
+  const ttsGuideText = "전북맹아학교 고등부 24회 3D 촉각 졸업앨범을 소개합니다. 본 작품은 선생님 1명과 학생 7명의 얼굴 특징을 3D 프린팅한 촉각 모델과 학생 본인의 음성 메시지를 결합한 졸업앨범입니다. 사용자는 손끝으로 친구의 얼굴 형태를 만지고, NFC 태그를 통해 연결되는 추억의 앨범 디지털 가이드에서 학생과 선생님의 목소리, 학생별 특징과 꿈, 배치 정보를 확인할 수 있습니다. 이 웹사이트는 큐알 코드를 통해 접속하는 작품 소개 페이지이며, 작품 개요, 이용 방법, 기대 효과, 제작 참여 정보를 안내합니다.";
+
   return (
-    <main className="min-h-screen bg-[#f8f2e9] text-[#211a16]">
+    <main className="min-h-screen bg-[#f8f2e9] text-[#211a16]" aria-label="전북맹아학교 3D 촉각 졸업앨범 작품 소개">
       <nav className="fixed left-1/2 top-5 z-50 hidden w-[min(92%,980px)] -translate-x-1/2 items-center justify-between rounded-full border border-white/70 bg-white/60 px-6 py-3 shadow-[0_10px_40px_rgba(60,43,27,0.10)] backdrop-blur-xl md:flex">
         <a href="#home" className="font-serif text-lg font-semibold">3D 촉각 졸업앨범</a>
         <div className="flex gap-6 text-sm font-medium text-[#6f625a]">
@@ -199,7 +267,10 @@ export default function Home() {
             <motion.p variants={fadeUp} className="mt-8 max-w-2xl text-lg leading-9 text-[#66594f] md:text-xl">
               본 작품은 학생의 얼굴 특징을 3D 프린팅한 촉각 모델과 학생 본인의 음성 메시지를 결합한 졸업앨범입니다. 사용자는 손끝으로 친구의 얼굴 형태를 만지고, 목소리를 들으며 졸업의 순간을 더 생생하게 기억할 수 있습니다.
             </motion.p>
-            <motion.div variants={fadeUp} className="mt-10 flex flex-wrap gap-4">
+            <motion.div variants={fadeUp}>
+              <TtsGuideButton text={ttsGuideText} />
+            </motion.div>
+            <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-4">
               <a href="#overview" className="rounded-full bg-[#211a16] px-7 py-4 text-sm font-semibold text-white shadow-xl shadow-[#211a16]/15 transition hover:bg-[#3a2d24]">
                 작품 소개 보기
               </a>
@@ -264,6 +335,7 @@ export default function Home() {
                     href="https://jdcho0721.github.io/Album-of-memories/index.html"
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="추억의 앨범 디지털 가이드 새 창으로 열기. 학생과 선생님의 음성 메시지, 학생별 특징과 꿈, 배치 정보를 확인할 수 있습니다."
                     className="font-serif text-2xl font-semibold text-white underline decoration-[#d7c19b]/50 underline-offset-8 transition hover:text-[#f1dfbd]"
                   >
                     추억의 앨범 디지털 가이드
