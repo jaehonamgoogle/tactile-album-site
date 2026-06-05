@@ -100,7 +100,7 @@ function HeroGallery() {
             <div className="absolute bottom-0 left-0 z-10 w-full p-4 sm:p-8">
               <div className="rounded-[1.2rem] border border-white/15 bg-[#211a16]/72 p-4 shadow-2xl backdrop-blur-md sm:rounded-[1.5rem] sm:p-5">
                 <p className="text-xs leading-6 text-[#eee2d1] sm:text-[15px] sm:leading-7">
-                  1명의 선생님과 7명의 학생 흉상을 포함한 촉각 앨범. 오른쪽 상단의 NFC tag를 통해 별도 음성 인터랙션 웹사이트로 연결됩니다.
+                  1명의 선생님과 7명의 학생 흉상을 포함한 촉각 앨범. 오른쪽 상단의 NFC tag를 통해 추억의 앨범 디지털 촉각 가이드로 연결됩니다.
                 </p>
               </div>
               <div className="mt-4 flex items-center justify-between gap-4">
@@ -261,7 +261,7 @@ function TimelineItem({ number, title, text }: { number: string; title: string; 
 }
 
 export default function Home() {
-  const ttsGuideText = "전북맹아학교 고등부 24회 3D 촉각 졸업앨범을 소개합니다. 본 작품은 선생님 1명과 학생 7명의 얼굴 특징을 3D 프린팅한 촉각 모델과 학생 본인의 음성 메시지를 결합한 졸업앨범입니다. 사용자는 손끝으로 친구의 얼굴 형태를 만지고, NFC 태그를 통해 연결되는 추억의 앨범 디지털 가이드에서 학생과 선생님의 목소리, 학생별 특징과 꿈, 배치 정보를 확인할 수 있습니다. 이 웹사이트는 큐알 코드를 통해 접속하는 작품 소개 페이지이며, 작품 개요, 이용 방법, 기대 효과, 제작 참여 정보를 안내합니다.";
+  const ttsGuideText = "전북맹아학교 고등부 24회 3D 촉각 졸업앨범을 소개합니다. 본 작품은 선생님 1명과 학생 7명의 얼굴 특징을 반영한 3D 촉각 모델과 음성 메시지, NFC 기반 디지털 촉각 가이드를 결합한 졸업앨범입니다. 큐알 코드는 이 앨범이 무엇인지 설명하는 작품 소개의 역할을 하고, NFC는 추억의 앨범 디지털 촉각 가이드로 연결되어 학생과 선생님의 목소리, 노래, 배치 정보, 장래 희망을 경험할 수 있게 합니다. 두 경로는 모두 졸업의 기억을 모두에게 전달한다는 하나의 목적으로 이어집니다.";
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-[#f8f2e9] text-[#211a16]" aria-label="전북맹아학교 3D 촉각 졸업앨범 작품 소개">
@@ -340,35 +340,34 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl gap-16 lg:grid-cols-[0.9fr_1.1fr]">
           <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.35 }}>
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.35em] text-[#d7c19b]">Experience Flow</p>
-            <h2 className="font-serif text-3xl font-semibold leading-tight sm:text-4xl md:text-5xl">QR로 소개를 읽고,<br />NFC로 목소리를 듣습니다.</h2>
+            <h2 className="font-serif text-3xl font-semibold leading-tight sm:text-4xl md:text-5xl">QR로 소개를,<br />NFC로 목소리를 듣습니다.</h2>
             <p className="mt-6 text-lg leading-9 text-[#d8cfc5]">
-              이 웹사이트는 앨범에 부착된 QR 코드를 통해 접속하는 작품 소개 페이지입니다. 관람자는 작품의 의도, 사용 방법, 기대 효과, 제작팀 정보를 한눈에 확인할 수 있습니다.
+              QR은 “이 앨범이 무엇인가”를 설명하는 맥락 제공의 역할이고, NFC는 “이 앨범을 어떻게 느끼는가”를 전달하는 체험의 역할입니다. 두 경로는 마지막에 “졸업의 기억을 모두에게”라는 하나의 목적으로 수렴합니다.
             </p>
             <div className="mt-8 rounded-[1.8rem] border border-white/10 bg-white/8 p-6 text-sm leading-7 text-[#eee2d1]">
-              학생 및 선생님의 음성 메시지, 학생별 특징과 꿈, 배치 안내, 노래 재생 기능은 앨범 오른쪽 상단의 NFC tag를 통해 접속하는 별도 웹사이트에서 제공됩니다.
+              NFC 촉각 가이드를 사용한 이유는 시각장애인에게 보다 효과적인 접근성을 제공하기 때문입니다. NFC는 돌출된 태그 위에 폰을 가져다 대기만 하면 되고, 링크에 접속된 디지털 촉각 가이드는 앨범의 3D 촉각 정보에 대한 도슨트 역할을 제공합니다.
             </div>
           </motion.div>
 
           <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} className="grid gap-8">
-            <TimelineItem number="1" title="QR 코드 스캔" text="앨범에 부착된 QR 코드를 스캔하여 본 작품 소개 웹사이트에 접속합니다." />
-            <TimelineItem number="2" title="작품 이해" text="3D 촉각 졸업앨범의 제작 의도, 구성 요소, 사용 방식, 기대 효과를 확인합니다." />
-            <TimelineItem number="3" title="NFC 기반 음성 경험" text="앨범 오른쪽 상단의 NFC tag를 통해 별도 인터랙션 웹사이트로 이동하고, 학생과 선생님의 음성 메시지와 콘텐츠를 경험합니다." />
+            <TimelineItem number="1" title="QR 코드 스캔" text="앨범에 부착된 QR 코드를 스캔하여 본 작품 소개 웹사이트에 접속합니다. 3D 촉각 졸업앨범의 제작 의도, 구성 요소, 사용 방식, 기대 효과를 확인합니다." />
+            <TimelineItem number="2" title="NFC 촉각 가이드" text="앨범 오른쪽 상단의 NFC tag를 통해 추억의 앨범 디지털 촉각 가이드로 이동합니다. 디지털 촉각 가이드는 앨범의 3D 촉각 정보를 음성으로 안내하는 도슨트 역할을 제공합니다." />
 
             <motion.div variants={fadeUp} className="overflow-hidden rounded-[2rem] border border-[#d7c19b]/30 bg-white/[0.06] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.18)] backdrop-blur">
               <div className="grid items-center gap-6 sm:grid-cols-[1fr_180px]">
                 <div>
-                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-[#d7c19b]">NFC Interactive Site</p>
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-[#d7c19b]">Digital Tactile Guide</p>
                   <a
                     href="https://jdcho0721.github.io/Album-of-memories/index.html"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="추억의 앨범 디지털 가이드 새 창으로 열기. 학생과 선생님의 음성 메시지, 학생별 특징과 꿈, 배치 정보를 확인할 수 있습니다."
+                    aria-label="추억의 앨범 디지털 촉각 가이드 새 창으로 열기. 학생과 선생님의 음성 메시지와 노래, 배치 정보, 장래 희망을 확인할 수 있습니다."
                     className="font-serif text-2xl font-semibold text-white underline decoration-[#d7c19b]/50 underline-offset-8 transition hover:text-[#f1dfbd]"
                   >
-                    추억의 앨범 디지털 가이드
+                    추억의 앨범 디지털 촉각 가이드
                   </a>
                   <p className="mt-4 text-[15px] leading-7 text-[#d8cfc5]">
-                    앨범 오른쪽 상단의 NFC tag를 인식하면 접속할 수 있는 별도 인터랙티브 웹사이트입니다. 학생과 선생님의 음성 메시지, 학생별 특징과 꿈, 배치 정보를 확인할 수 있습니다.
+                    앨범의 NFC tag를 통해 이동할 수 있는 웹접근성 준수 기반의 체화된 인지 UX입니다. 학생과 선생님이 직접 남긴 목소리와 노래를 재생하고, 챗봇을 통한 음성 질문으로 촉각 앨범에 누가 어느 위치에 있는지와 장래 희망을 확인할 수 있습니다.
                   </p>
                   <p className="mt-4 text-xs font-medium uppercase tracking-[0.18em] text-[#d7c19b]">Tap the title or scan the QR</p>
                 </div>
@@ -376,12 +375,12 @@ export default function Home() {
                   href="https://jdcho0721.github.io/Album-of-memories/index.html"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="추억의 앨범 디지털 가이드 열기"
+                  aria-label="추억의 앨범 디지털 촉각 가이드 열기"
                   className="mx-auto block w-full max-w-[180px] rounded-[1.4rem] bg-white p-3 shadow-2xl transition hover:scale-[1.02]"
                 >
                   <Image
                     src="/memory-guide-qr.jpg"
-                    alt="추억의 앨범 디지털 가이드 QR 코드"
+                    alt="추억의 앨범 디지털 촉각 가이드 QR 코드"
                     width={320}
                     height={320}
                     className="h-auto w-full rounded-[1rem]"
@@ -400,19 +399,23 @@ export default function Home() {
             title="앨범이 담고 있는 것"
             desc="하나의 졸업앨범 안에 촉각, 청각, 대화형 정보 접근을 함께 담았습니다."
           />
-          <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} className="grid gap-6 lg:grid-cols-4">
             <FeatureCard icon={Users} title="8개의 흉상">
               선생님 1명과 학생 7명의 얼굴 특징을 반영한 3D 촉각 모델을 포함합니다.
             </FeatureCard>
-            <FeatureCard icon={Headphones} title="음성 메시지">
-              학생과 선생님이 직접 남긴 목소리를 통해 졸업의 기억을 생생하게 전달합니다.
-            </FeatureCard>
-            <FeatureCard icon={MapPinned} title="배치 안내">
-              채팅 또는 음성 질문을 통해 누가 어느 위치에 있는지 확인할 수 있습니다.
-            </FeatureCard>
-            <FeatureCard icon={Nfc} title="NFC 연결">
-              앨범의 NFC tag를 통해 별도 음성 인터랙션 웹사이트로 이동할 수 있습니다.
-            </FeatureCard>
+            <motion.div variants={fadeUp} className="rounded-[2rem] border border-[#eadfce] bg-white/75 p-7 shadow-[0_18px_60px_rgba(75,55,35,0.08)] backdrop-blur lg:col-span-3">
+              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-[#f3eadb] text-[#8f6b3d]">
+                <Nfc size={22} aria-hidden="true" />
+              </div>
+              <h3 className="mb-4 font-serif text-2xl font-semibold text-[#241b15]">디지털 촉각 가이드</h3>
+              <div className="space-y-3 text-[15px] leading-7 text-[#74665d]">
+                <p>앨범의 NFC tag를 통해 추억의 앨범 디지털 촉각 가이드로 이동할 수 있습니다.</p>
+                <p>촉각 가이드는 웹접근성을 준수한 체화된 인지 기반의 UX 디자인입니다.</p>
+                <p>학생과 선생님이 직접 남긴 목소리와 노래 재생을 통해 졸업의 기억을 생생하게 전달합니다.</p>
+                <p>챗봇을 통한 음성 질문으로 촉각 앨범에 누가 어느 위치에 있는지, 그리고 장래 희망이 무엇인지 확인할 수 있습니다.</p>
+                <p>웹 접근성을 적용했고, 화면 전환도 스크린 리더가 추적할 수 있도록 구성했습니다.</p>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -446,7 +449,7 @@ export default function Home() {
           <SectionTitle
             eyebrow="Team & Credits"
             title="TEAM 소개"
-            desc="본 작품은 심화융합캡스톤디자인 수업 팀프로젝트로 진행되었으며, 성균관대학교 조준동 명예교수님의 지도 아래 제작되었습니다."
+            desc="3D 촉각 졸업앨범은 성균관대학교 심화융합캡스톤디자인 수업의 팀 프로젝트로 제작되었습니다."
           />
           <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.25 }} className="rounded-[2.5rem] border border-[#eadfce] bg-white p-8 shadow-[0_24px_80px_rgba(75,55,35,0.08)] md:p-12">
             <div className="grid gap-10 md:grid-cols-2">
@@ -454,28 +457,31 @@ export default function Home() {
                 <h3 className="font-serif text-2xl font-semibold text-[#211a16]">제작 참여</h3>
                 <div className="mt-4 space-y-4 text-[15px] leading-8 text-[#6f625a]">
                   <p>
-                    <strong className="font-semibold text-[#211a16]">디지털 콘텐츠</strong> · 성균관대학교 조준동 명예교수 제작, WCAG 2.1 AA 준수 설계, TalkBack·VoiceOver 지원
+                    <strong className="font-semibold text-[#211a16]">3D 촉각 졸업앨범</strong>은 성균관대학교 심화융합캡스톤디자인 수업의 팀 프로젝트로 제작되었습니다.
                   </p>
                   <p>
-                    <strong className="font-semibold text-[#211a16]">촉각 모델</strong> · NFC 태그, 프레임 제작, QR 작품소개 등
+                    <strong className="font-semibold text-[#211a16]">담당교수</strong> · 조준동
                   </p>
                   <p>
-                    <strong className="font-semibold text-[#211a16]">심화융합캡스톤디자인 수업 팀프로젝트</strong> · 담당교수 조준동, 팀원 문홍진, 남재호, 장예림, 최송희
+                    <strong className="font-semibold text-[#211a16]">디지털 촉각 가이드</strong> · 성균관대학교 조준동 명예교수 제작, NFC 태깅으로 진입, TalkBack·VoiceOver 지원
                   </p>
                   <p>
-                    <strong className="font-semibold text-[#211a16]">제작 지원</strong> · 성균관대학교 RISE 사업단 실습비 지원
+                    <strong className="font-semibold text-[#211a16]">촉각 2.5D 모델 및 QR 소개 콘텐츠 제작</strong> · 팀원 문홍진, 남재호, 장예림, 최송희
+                  </p>
+                  <p>
+                    <strong className="font-semibold text-[#211a16]">실습비 지원</strong> · 성균관대학교 RISE 사업단
                   </p>
                 </div>
               </div>
               <div>
                 <h3 className="font-serif text-2xl font-semibold text-[#211a16]">감사의 말</h3>
                 <p className="mt-4 leading-8 text-[#6f625a]">
-                  제작에 도움을 주신 전북맹아학교 김운기 교육정보부장님과 협조 및 참여해주신 학생 여러분께 진심으로 감사드립니다. 또한 함께 기획해주신 전북맹아학교와 성균관대학교 관계자분들께 깊이 감사드립니다.
+                  제작 및 기획에 도움을 주신 전북맹아학교 선생님들과 학생들에게 깊이 감사드립니다.
                 </p>
               </div>
             </div>
             <div className="mt-10 rounded-[1.7rem] bg-[#f8f2e9] px-6 py-5 text-center text-sm leading-7 text-[#6f625a]">
-              심화융합캡스톤디자인 수업 팀프로젝트 · 담당교수 조준동 · 성균관대학교 RISE 사업단 실습비 지원
+              성균관대학교 심화융합캡스톤디자인 수업 팀프로젝트 · 담당교수 조준동 · 성균관대학교 RISE 사업단 실습비 지원
             </div>
           </motion.div>
         </div>
